@@ -1,0 +1,79 @@
+[System]
+Name='FIS_1'
+Type='mamdani'
+Version=2.0
+NumInputs=4
+NumOutputs=2
+NumRules=13
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Throughtput'
+Range=[0 1000]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 100 500]
+MF2='High':'trimf',[100 500 800]
+MF3='vHigh':'trapmf',[500 800 1000 1000]
+
+[Input2]
+Name='PDR'
+Range=[0 100]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 90 95]
+MF2='Medium':'trimf',[95 96 97]
+MF3='High':'trapmf',[97 99 100 100]
+
+[Input3]
+Name='Overhead'
+Range=[0 400]
+NumMFs=3
+MF1='V-good':'trapmf',[0 0 13.33 200]
+MF2='good':'trimf',[13.33 200 400]
+MF3='Bad':'trapmf',[200 386.7 400 400]
+
+[Input4]
+Name='Delay'
+Range=[0 25]
+NumMFs=3
+MF1='V-good':'trapmf',[0 0 6.25 9.375]
+MF2='Accepted':'trimf',[9.375 14.06 18.75]
+MF3='bad':'trapmf',[18.75 21.88 25 25]
+
+[Output1]
+Name='Down_QoS_1'
+Range=[0 1]
+NumMFs=5
+MF1='V-bad':'trapmf',[0 0 0.1 0.2]
+MF2='bad':'trimf',[0.2 0.3 0.4]
+MF3='Accepted':'trimf',[0.4 0.5 0.6]
+MF4='Good':'trimf',[0.6 0.7 0.8]
+MF5='V-good':'trapmf',[0.8 0.9 1 1]
+
+[Output2]
+Name='Up_QoS_1'
+Range=[0 1]
+NumMFs=5
+MF1='V-bad':'trapmf',[0 0 0.1 0.2]
+MF2='Accepted':'trimf',[0.4 0.5 0.6]
+MF3='Good':'trimf',[0.6 0.7 0.8]
+MF4='Bad':'trimf',[0.2 0.3 0.4]
+MF5='V-good':'trapmf',[0.8 0.9 1 1]
+
+[Rules]
+-3 1 0 0, 0 1 (1) : 1
+1 -1 0 0, 0 4 (1) : 1
+2 2 0 0, 0 2 (1) : 1
+3 2 0 0, 0 3 (1) : 1
+2 3 0 0, 0 3 (1) : 1
+3 3 0 0, 0 5 (1) : 1
+0 0 0 3, 1 0 (1) : 1
+0 0 3 2, 2 0 (1) : 1
+0 0 1 2, 4 0 (1) : 1
+0 0 2 2, 3 0 (1) : 1
+0 0 3 1, 3 0 (1) : 1
+0 0 -3 1, 5 0 (1) : 1
+3 1 0 0, 0 4 (1) : 1

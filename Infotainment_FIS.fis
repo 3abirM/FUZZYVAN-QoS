@@ -1,0 +1,74 @@
+[System]
+Name='Infotainment_FIS'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=2
+NumRules=14
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Delay'
+Range=[0 25]
+NumMFs=3
+MF1='Good':'trapmf',[0 0 5 10]
+MF2='Medium':'trimf',[5 10 15]
+MF3='Bad':'trapmf',[10 15 25 25]
+
+[Input2]
+Name='Overhead'
+Range=[0 400]
+NumMFs=3
+MF1='Good':'trapmf',[0 0 50 100]
+MF2='Medium':'trimf',[50 100 150]
+MF3='Bad':'trapmf',[100 150 400 400]
+
+[Input3]
+Name='PDR'
+Range=[0 100]
+NumMFs=5
+MF1='V-low':'trapmf',[0 0 55 60]
+MF2='Low':'trimf',[55 65 75]
+MF3='Medium':'trimf',[65 75 85]
+MF4='High':'trimf',[75 85 95]
+MF5='V-high':'trapmf',[90 95 100 100]
+
+[Output1]
+Name='UP\_QoS2'
+Range=[0 1]
+NumMFs=5
+MF1='V-bad':'trapmf',[0 0 0.2 0.3]
+MF2='Bad':'trimf',[0.2 0.35 0.5]
+MF3='Accepted':'trimf',[0.35 0.5 0.65]
+MF4='Good':'trimf',[0.5 0.65 0.8]
+MF5='V-good':'trapmf',[0.65 0.8 1 1]
+
+[Output2]
+Name='Down\_QoS2'
+Range=[0 1]
+NumMFs=5
+MF1='V-bad':'trapmf',[0 0 0.2 0.3]
+MF2='Bad':'trimf',[0.2 0.35 0.5]
+MF3='Accepted':'trimf',[0.35 0.5 0.65]
+MF4='Good':'trimf',[0.5 0.65 0.8]
+MF5='V-good':'trapmf',[0.65 0.8 1 1]
+
+[Rules]
+3 3 0, 0 1 (1) : 1
+3 2 0, 0 2 (1) : 1
+3 1 0, 0 3 (1) : 1
+2 3 0, 0 2 (1) : 1
+2 2 0, 0 3 (1) : 1
+2 1 0, 0 4 (1) : 1
+1 3 0, 0 2 (1) : 1
+1 2 0, 0 4 (1) : 1
+1 1 0, 0 5 (1) : 1
+0 0 1, 1 0 (1) : 1
+0 0 2, 2 0 (1) : 1
+0 0 3, 3 0 (1) : 1
+0 0 4, 4 0 (1) : 1
+0 0 5, 5 0 (1) : 1
